@@ -20,7 +20,8 @@ a fast multiple nucleotide sequence alignment method based on FM-index
 **--in [filename]**         Input the sequences file in FASTA format  
 **--out [file]**           Output of the aligned sequences in FASTA format. The default "output" is filename.fmalign.  
 **--thread [int]**          Set the number of CPU threads (default: 1).  
-**--package**               Aligning the sub-sequences by MSA tool, mafft or halign. The default "package" is mafft.  
+**--package**               Aligning the sub-sequences by MSA tool, mafft or halign. The default "package" is mafft.
+
 **notice：** if package mafft can not work, please type
 >cd packages/MAFFT
 >make
