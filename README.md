@@ -23,7 +23,7 @@ a fast multiple nucleotide sequence alignment method based on FM-index
 **--package**               Aligning the sub-sequences by MSA tool, mafft or halign. The default "package" is mafft.
 
 **notice：** if package mafft can not work, please type
->cd packages/MAFFT
+>cd packages/MAFFT  
 >make
 
 **Related tools:**   
