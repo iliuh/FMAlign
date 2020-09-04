@@ -16,7 +16,7 @@ a fast multiple nucleotide sequence alignment method based on FM-index
 * General Options:  
 **--help**                  Show the help file.  
 
-* Options of alignment step:  
+* Options of alignment:  
 **--in [filename]**         Input the sequences file in FASTA format  
 **--out [file]**           Output of the aligned sequences in FASTA format. The default "output" is filename.fmalign.  
 **--thread [int]**          Set the number of CPU threads (default: 1).  
