@@ -360,7 +360,6 @@ void getRef(FILE *fp)//得到序列作为建索引的基因
 		memcpy(joinseqs + tmplen, seqset[i].seq, seqset[i].seq_size);
 		tmplen += seqset[i].seq_size;
 		seqsrank[i + 1] = tmplen;
-		fprintf(stdout, "%u\n", seqset[i].seq_size);
 	}
 	joinseqs[tmplen] = '\0';
 }
