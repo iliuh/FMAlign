@@ -188,7 +188,7 @@ inline unsigned int find_occ_fm_index(unsigned int line, int delta, bwt_string_t
 
 	bwt_string_type ans = bitmapper_index_params.nacgt[delta];
 
-	///这里是增加的
+	///杩欓噷鏄鍔犵殑
 	///ans = ans + high_occ_table[(line / bitmapper_index_params.high_compress_occ) * 4 + delta];
 	ans = ans + high_occ_table[((line >> 16) << 2) + delta];
 

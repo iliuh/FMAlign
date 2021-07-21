@@ -1,3 +1,11 @@
+/*
+ * @Author: your name
+ * @Date: 2021-03-18 20:54:26
+ * @LastEditTime: 2021-04-08 14:16:13
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /FMAlign-0.2.6/Auxiliary.h
+ */
 #ifndef _AUXILIARY_H
 #define _AUXILIARY_H
 

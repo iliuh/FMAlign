@@ -13,7 +13,7 @@ ROOT_DIR = $(shell pwd)
 FMTREE_LIB_DIR = FMtree
 
 
-MAIN_OBJS = load_seqs.o chain.o common_seed.o subseqs.o command_line.o my_main.o
+MAIN_OBJS = load_seqs.o minimizer.o chain.o common_seed.o subseqs.o command_line.o my_main.o
 
 
 FMTREE_OBJS = \
@@ -45,6 +45,9 @@ chain.o : chain.cpp
 
 common_seed.o : common_seed.cpp 
 	$(CC) $(CFLAGS) -c common_seed.cpp
+
+minimizer.o : minimizer.cpp
+	$(CC) $(CFLAGS) -c minimizer.cpp
 	
 bwt.o : $(FMTREE_LIB_DIR)/bwt.cpp
 	$(CC) $(CFLAGS) -c $(FMTREE_LIB_DIR)/bwt.cpp

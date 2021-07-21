@@ -93,7 +93,7 @@ void Print_H()
 	fprintf(stdout,"\n");
 
 
-	fprintf(stdout,"Options of alignment:\n");
+	fprintf(stdout,"Options of read mapping step:\n");
 	fprintf(stdout," --in [inputfile]\tInput the sequences file in FASTA format\n");
 	fprintf(stdout," --out [file]\t\tOutput of the aligned sequences in FASTA format (default: inputfile.fmalign).\n");
 	fprintf(stdout," --thread [int]\t\tSet the number of CPU threads (default: 1).\n");

@@ -84,28 +84,26 @@ int main( int argc, char *argv[] )
 
 
 	std::vector<_chain> chain;
-	chain = filter_noise_chain(commonseed, comseedsize);
+	// chain = filter_noise_chain(commonseed, comseedsize);
+	chain = creat_optimal_chain(commonseed, comseedsize);
+	// creat_optimal_chain_minimizer(commonseed, comseedsize);
 
 
-	gettimeofday(&chain_time, NULL);
+ 	gettimeofday(&chain_time, NULL);
 	timeconsumed = chain_time.tv_sec-fm_time.tv_sec +(chain_time.tv_usec-fm_time.tv_usec)/1000000.0;
 	fprintf(stdout, "Get best chains time: %5.3f seconds\n",  timeconsumed);
-	
-	
+
+
+
+
 	write_sub_file(chain);
 
 
 
 
-	// finish = clock();
-	// duration = (double)(finish - start) / CLOCKS_PER_SEC;
-	// fprintf(stdout, "Time: %5.3f seconds\n",  duration);
-	// double cost_t = time(NULL) - t;
-	// fprintf(stdout, "Time: %5.3f seconds\n",  cost_t);
-	
 	gettimeofday(&end, NULL);
 	timeconsumed = end.tv_sec-start.tv_sec +(end.tv_usec-start.tv_usec)/1000000.0;
-	fprintf(stdout, "Time: %5.3f seconds\n",  timeconsumed);
+	fprintf(stdout, "Time: %5.3f seconds\n",  timeconsumed);  
 
 
 	free(seqset);

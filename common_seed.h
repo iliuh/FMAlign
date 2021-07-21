@@ -8,7 +8,7 @@ using std::vector;
 
 
 
-struct _seqseed//一个种子在每条序列上对应的位置和频次
+struct _seqseed//一个种子在一条序列上对应的位置和频次
 {
 	uint32_t freqonSEQ;
 	uint32_t *locLIST;
@@ -23,9 +23,10 @@ struct _seed//一个公共种子的id及在所有序列上的信息
 };
 
 
-
+bool even(int num);
 void setkvalue();
 void setkvalue_sqrt();
+
 _seed * search_from_bwt_more_than_3(char *read);
 void search_from_bwt_less_than_4(char *read);
 _seed * searchBWT(char *read);
