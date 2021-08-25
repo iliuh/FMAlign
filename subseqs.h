@@ -57,6 +57,7 @@ void sub_file(Subseq_context *context, uint32_t fileID, uint32_t range_first,
 // void write_sub_file(_chain *chain);
 char *getline(FILE *_fp );
 void write_sub_file( std::vector<_chain> chain);
+void align_direct();
 
 
 #endif

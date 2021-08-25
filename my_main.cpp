@@ -83,23 +83,38 @@ int main( int argc, char *argv[] )
 	fprintf(stdout, "FM-index and search common seed time: %5.3f seconds\n",  timeconsumed);
 
 
+	if (comseedsize == 0) 
+	{
+		align_direct();
+		gettimeofday(&end, NULL);
+		timeconsumed = end.tv_sec-start.tv_sec +(end.tv_usec-start.tv_usec)/1000000.0;
+		fprintf(stdout, "no common seeds ...\n"); 
+		fprintf(stdout, "Time: %5.3f seconds\n",  timeconsumed); 
+		free(seqset);
+		return( 0 ); 
+	}
+
+
 	std::vector<_chain> chain;
-	// chain = filter_noise_chain(commonseed, comseedsize);
 	chain = creat_optimal_chain(commonseed, comseedsize);
 	// creat_optimal_chain_minimizer(commonseed, comseedsize);
-
+	if (chain_size_ == 0) 
+	{
+		align_direct();
+		gettimeofday(&end, NULL);
+		timeconsumed = end.tv_sec-start.tv_sec +(end.tv_usec-start.tv_usec)/1000000.0;
+		fprintf(stdout, "no chains ...\n"); 
+		fprintf(stdout, "Time: %5.3f seconds\n",  timeconsumed); 
+		free(seqset);
+		return( 0 ); 
+	}
 
  	gettimeofday(&chain_time, NULL);
 	timeconsumed = chain_time.tv_sec-fm_time.tv_sec +(chain_time.tv_usec-fm_time.tv_usec)/1000000.0;
 	fprintf(stdout, "Get best chains time: %5.3f seconds\n",  timeconsumed);
 
 
-
-
 	write_sub_file(chain);
-
-
-
 
 	gettimeofday(&end, NULL);
 	timeconsumed = end.tv_sec-start.tv_sec +(end.tv_usec-start.tv_usec)/1000000.0;

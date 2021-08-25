@@ -54,10 +54,9 @@ void thread_seq_align(Pkg_context context, uint16_t thread_id)
 		.append(std::to_string(context.files_size[thread_id])).append(" ")
 		.append(std::to_string(thread_id))
 		.append(" ").append(std::to_string(0))
-		.append(" ").append(std::to_string(chain_size_ + 1));
+		.append(" ").append(std::to_string(1));
 
 	cmnd.append(" > /dev/null");
-
 	system(cmnd.c_str());
 }
 
@@ -326,10 +325,12 @@ void to_lower(char *s){
 }
 
 
-void write_sub_file( std::vector<_chain> chain)
+
+
+void write_sub_file( std::vector<_chain> chain)    //If the number of commonseeds is not 0
 {
 
-	threads = std::min(threads, (int)chain_size_ + 1);
+	// threads = std::min(threads, (int)chain_size_ + 1);
 	// fprintf(stdout, "Treads %d\n", threads);
 
 	vector<uint16_t> p_range(threads + 1);//计算每个线程应该计算的子文件数量，
@@ -403,7 +404,7 @@ void write_sub_file( std::vector<_chain> chain)
 		std::string tmp_file;
 		tmp_file = set_filename(i);
 
-		FILE* _tmp_fp = fopen(tmp_file.c_str(), "wb+");//用于保存子文件和比对结果文件的信息
+		FILE* _tmp_fp = fopen(tmp_file.c_str(), "wb+");//用于保存子文件和比对结果文件的文件名
 		if (_tmp_fp == NULL)
 		{
 			fprintf(stdout, "Failed to make %s! will exit ...\n", tmp_file.c_str());	
@@ -543,7 +544,61 @@ void write_sub_file( std::vector<_chain> chain)
 	cmd.append("subfile*.*");
 	system(cmd.c_str());
 
+}
 
+void align_direct()                                //If the number of commonseeds is 0 without writting sub-files
+{
+	std::string cmnd;
+	std::string file_name;			
+	file_name = set_filename(0);
+	if (outputfile == NULL)
+	{
+		outputfile = (char *)malloc(sizeof(char) * PATH_MAX_LEN);
+		strcpy(outputfile, inputfile);
+		strcpy(outputfile + strlen(inputfile), ".fmalign");
+		puts(outputfile);
+	}
+
+	FILE* _fp = fopen(file_name.c_str(), "wb+");//用于保存子文件和比对结果文件的文件名
+	if (_fp == NULL)
+	{
+		fprintf(stdout, "Failed to make %s! will exit ...\n", file_name.c_str());	
+	}
+
+
+	write_raw(inputfile, strlen(inputfile), _fp);
+	write_raw("\n", 1, _fp);
+	write_raw(outputfile, strlen(outputfile), _fp);
+	write_raw("\n", 1, _fp);
+	
+	fclose(_fp);
+
+
+	switch (pkg)
+	{
+		case HALIGN:
+			cmnd.append("java -cp ")
+				.append("packages/HAlign:")
+				.append("packages/HAlign/HAlign2.1.jar halignWrapper \"");
+			break;
+		case MAFFT:
+			cmnd.append("packages/MAFFT/mafftWrapper \"");
+			break;
+	}
+
+	
+	cmnd.append(file_name).append("\" ")
+		.append(std::to_string(1).append(" "))
+		.append(std::to_string(0))
+		.append(" ").append(std::to_string(0))
+		.append(" ").append(std::to_string(threads));
+
+	cmnd.append(" > /dev/null");
+	system(cmnd.c_str());
+
+	std::string cmd = "rm -f ";
+	cmd.append("subfile*.*");
+	system(cmd.c_str());
 }
 
 
