@@ -128,6 +128,13 @@ std::string extract_dir( std::string s)
 	//如果没找到dir_separator就是置空，找到就拷贝root
 	return s.find_last_of(dir_separator) == std::string::npos ? "" : s.substr(0, s.find_last_of(dir_separator));
 }
+
+std::string extract_filename( std::string s)
+{
+	//如果没找到dir_separator就是置空，找到就拷贝root
+	return s.find_last_of(dir_separator) == std::string::npos ? s : s.substr(s.find_last_of(dir_separator) + 1);
+}
+
 void set_path()
 {
 
@@ -178,9 +185,8 @@ std::string set_filename(uint32_t fileID)
 	if (tmpdir != "")
 		ss << tmpdir << dir_separator;
 	// ss << "chain-" << hash_key << "-" << to_string(0) << ".tmp";
-	ss << "subfile-"  << hash_key << "-" << std::to_string(fileID) << ".tmp";
+	ss << "sub-" << extract_filename(inputfile) << hash_key << "-" << std::to_string(fileID) << ".tmp";
 	ss >> file_name_;
-	// std::cout<<file_name_<<std::endl;
 	ss.str("");
 	return file_name_;
 }
@@ -541,7 +547,7 @@ void write_sub_file( std::vector<_chain> chain)    //If the number of commonseed
 
 
 	std::string cmd = "rm -f ";
-	cmd.append("subfile*.*");
+	cmd.append("sub-*.*");
 	system(cmd.c_str());
 
 }
