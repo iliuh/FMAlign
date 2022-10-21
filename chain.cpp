@@ -417,8 +417,8 @@ std::vector<_chain> creat_optimal_chain(_seed *commonseedlist, uint32_t seedsize
 		
 	}
 	// mean_wide = mean_wide / all_chain_num;
+	fprintf(stdout, "the total number of merged chains is %u \n", all_chain_num);
 	fprintf(stdout, "chain %u have long wide %u\n",i,  longest_wide);
-	
 
 
 
@@ -445,9 +445,6 @@ std::vector<_chain> creat_optimal_chain(_seed *commonseedlist, uint32_t seedsize
 
 
 
-
-
-	fprintf(stdout, "the total number of merged chains is %u \n", all_chain_num);
 	
 	for ( i = 0; i < all_chain_num; i++)
 	{
@@ -544,6 +541,7 @@ std::vector<_chain> creat_optimal_chain(_seed *commonseedlist, uint32_t seedsize
 	int chain_num = 0;
 	float higest_score = 0.0;
 
+
 	for (i = all_chain_num - 1; i > 0; i--)
 	{
 		// if (p[i] == -1 && p[i] == 0) continue;
@@ -603,15 +601,18 @@ std::vector<_chain> creat_optimal_chain(_seed *commonseedlist, uint32_t seedsize
 
 
 	unsigned int lll = 0;
-	for ( i = best_chain_index[longest_chain_index].size() - 2; i > 0; i--)
-	{
-		
-		best_chain.push_back(all_chain[best_chain_index[longest_chain_index][i]]);
-		lll ++;
+
+	if(all_chain_num == 1) best_chain.push_back(all_chain[0]);
+	else{
+		for ( i = best_chain_index[longest_chain_index].size() - 1; i >= 0; i--)
+		{
+			
+			best_chain.push_back(all_chain[best_chain_index[longest_chain_index][i]]);
+			lll ++;
+		}
+		vector<vector<int>>().swap(best_chain_index);
 	}
 
-	
-	vector<vector<int>>().swap(best_chain_index);
 	vector<_chain>().swap(all_chain);
 	
 	
